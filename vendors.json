@@ -77,6 +77,8 @@
       "name": "Satisfyer",
       "region": "德國",
       "official_site": "https://www.satisfyer.com",
+      "taiwan_site": "https://www.satisfyer.com.tw",
+      "snapshot_pages": ["https://www.satisfyer.com.tw/"],
       "taiwan_search": [
         "Satisfyer 台灣 新品",
         "Satisfyer site:shopee.tw",
@@ -95,6 +97,8 @@
       "name": "SISTALK",
       "region": "中國",
       "official_site": "https://monsterpub.com",
+      "taiwan_site": "https://www.sistalk.com.tw",
+      "snapshot_pages": ["https://www.sistalk.com.tw/pages/%E8%B2%B7%E9%9A%BB%E5%B0%8F%E6%80%AA%E7%8D%B8"],
       "taiwan_search": [
         "Monster Pub 台灣 新品",
         "小怪獸 台灣 新品",
@@ -145,27 +149,11 @@
       "notes": "台灣品牌，品牌頁於 sistalk.com.tw/pages/qingnan，主要於 PChome、蝦皮、甜蜜伴侶等通路販售"
     },
     {
-      "id": "puissante",
-      "name": "Puissante",
-      "region": "法國",
-      "official_site": "https://puissante.co/en",
-      "taiwan_search": [
-        "Puissante 台灣 新品",
-        "Puissante site:shopee.tw",
-        "Puissante site:redino.tw"
-      ],
-      "search_keywords": [
-        "Puissante new product",
-        "Puissante new arrival",
-        "Puissante nouveau produit"
-      ],
-      "notes": "法國女性向品牌，醫療矽膠材質，FDA/CE認證"
-    },
-    {
       "id": "pxpxp",
       "name": "PxPxP",
       "region": "日本",
       "official_site": "https://hatopla.com",
+      "snapshot_pages": ["https://www.dp.toys/categories/hatopla"],
       "taiwan_search": [
         "HATOPLA 台灣 新品",
         "PxPxP PPP EXE site:shopee.tw",
