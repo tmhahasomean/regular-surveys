@@ -1,0 +1,22 @@
+# ── API 金鑰（絕對不能上傳）──
+.env
+.env.*
+!.env.example
+
+# ── Claude Code 本機設定（各人機器不同）──
+.claude/settings.local.json
+CLAUDE.local.md
+
+# ── 執行產出物（不需分享）──
+reports/
+snapshots/
+
+# ── Python 暫存 ──
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# ── 系統檔案 ──
+.DS_Store
+Thumbs.db

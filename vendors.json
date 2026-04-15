@@ -1,0 +1,200 @@
+{
+  "config": {
+    "report_language": "zh-TW",
+    "lookback_days": 30,
+    "output_dir": "K:\\AI助理\\每週確認廠商情報\\reports",
+    "claude_cost_limit_usd": 0.20
+  },
+  "taiwan_distributors": [
+    { "name": "紅犀牛", "url": "https://www.redino.tw" },
+    { "name": "甜蜜伴侶", "url": "https://www.intimate-toys.com" },
+    { "name": "OGC株式會社", "url": "https://www.happyogc.com" },
+    { "name": "酷兒通販", "url": "https://www.coolguy.com.tw" },
+    { "name": "PChome 24h", "url": "https://24h.pchome.com.tw" },
+    { "name": "蝦皮購物", "url": "https://shopee.tw" },
+    { "name": "Beyourlover", "url": "https://www.beyourlover.com.tw" }
+  ],
+  "vendors": [
+    {
+      "id": "tenga",
+      "name": "TENGA",
+      "region": "日本",
+      "official_site": "https://www.tenga.co.jp",
+      "global_site": "https://tenga-global.com",
+      "taiwan_search": [
+        "TENGA 台灣 新品",
+        "TENGA site:shopee.tw",
+        "TENGA site:redino.tw",
+        "TENGA site:24h.pchome.com.tw"
+      ],
+      "search_keywords": [
+        "TENGA 新商品",
+        "TENGA 新製品",
+        "TENGA new product",
+        "TENGA 新品発売"
+      ],
+      "notes": "日本主要官網為 tenga.co.jp；全球英文站為 tenga-global.com"
+    },
+    {
+      "id": "haru",
+      "name": "HARU",
+      "region": "台灣",
+      "official_site": "https://letsharu.com",
+      "taiwan_search": [
+        "HARU letsharu 新品 台灣",
+        "HARU site:shopee.tw",
+        "HARU site:24h.pchome.com.tw"
+      ],
+      "search_keywords": [
+        "HARU letsharu 新品",
+        "HARU make love 新商品",
+        "letsharu new product"
+      ],
+      "notes": "台灣本地品牌，主打潤滑液與感官探索產品"
+    },
+    {
+      "id": "upko",
+      "name": "UPKO",
+      "region": "中國",
+      "official_site": "https://www.upkoofficialshop.com",
+      "taiwan_search": [
+        "UPKO 台灣 新品",
+        "UPKO site:shopee.tw",
+        "UPKO site:redino.tw"
+      ],
+      "search_keywords": [
+        "UPKO new product",
+        "UPKO new arrival",
+        "UPKO 新品",
+        "UPKO BDSM new"
+      ],
+      "notes": "高端BDSM皮具品牌，使用義大利皮革"
+    },
+    {
+      "id": "satisfyer",
+      "name": "Satisfyer",
+      "region": "德國",
+      "official_site": "https://www.satisfyer.com",
+      "taiwan_search": [
+        "Satisfyer 台灣 新品",
+        "Satisfyer site:shopee.tw",
+        "Satisfyer site:redino.tw",
+        "Satisfyer site:24h.pchome.com.tw"
+      ],
+      "search_keywords": [
+        "Satisfyer new product",
+        "Satisfyer new arrival",
+        "Satisfyer 新品"
+      ],
+      "notes": "德國品牌，以氣壓吸吮系列聞名，產品線廣泛"
+    },
+    {
+      "id": "sistalk",
+      "name": "SISTALK",
+      "region": "中國",
+      "official_site": "https://monsterpub.com",
+      "taiwan_search": [
+        "Monster Pub 台灣 新品",
+        "小怪獸 台灣 新品",
+        "Monster Pub site:shopee.tw"
+      ],
+      "search_keywords": [
+        "Monster Pub 新品",
+        "SISTALK 新商品",
+        "monsterpub new product",
+        "Monster Pub new arrival"
+      ],
+      "notes": "SISTALK旗下品牌為Monster Pub（小怪獸），面向女性用戶"
+    },
+    {
+      "id": "we-vibe",
+      "name": "We-Vibe",
+      "region": "加拿大",
+      "official_site": "https://www.we-vibe.com",
+      "snapshot_pages": ["https://www.we-vibe.com/us/collections/new-arrivals"],
+      "taiwan_search": [
+        "We-Vibe 威浮 台灣 新品",
+        "We-Vibe site:shopee.tw",
+        "We-Vibe site:redino.tw"
+      ],
+      "search_keywords": [
+        "We-Vibe new product",
+        "We-Vibe new arrival",
+        "We-Vibe 新品"
+      ],
+      "notes": "加拿大品牌，以情侶共用振動器聞名，台灣通稱「威浮」"
+    },
+    {
+      "id": "qingnan",
+      "name": "輕喃",
+      "region": "台灣",
+      "official_site": "https://www.sistalk.com.tw/pages/qingnan",
+      "snapshot_pages": ["https://www.sistalk.com.tw/pages/qingnan"],
+      "taiwan_search": [
+        "輕喃 qingnan site:shopee.tw",
+        "輕喃 site:24h.pchome.com.tw",
+        "輕喃 site:intimate-toys.com"
+      ],
+      "search_keywords": [
+        "輕喃 新品",
+        "輕喃 qingnan 情趣用品",
+        "輕喃 按摩棒"
+      ],
+      "notes": "台灣品牌，品牌頁於 sistalk.com.tw/pages/qingnan，主要於 PChome、蝦皮、甜蜜伴侶等通路販售"
+    },
+    {
+      "id": "puissante",
+      "name": "Puissante",
+      "region": "法國",
+      "official_site": "https://puissante.co/en",
+      "taiwan_search": [
+        "Puissante 台灣 新品",
+        "Puissante site:shopee.tw",
+        "Puissante site:redino.tw"
+      ],
+      "search_keywords": [
+        "Puissante new product",
+        "Puissante new arrival",
+        "Puissante nouveau produit"
+      ],
+      "notes": "法國女性向品牌，醫療矽膠材質，FDA/CE認證"
+    },
+    {
+      "id": "pxpxp",
+      "name": "PxPxP",
+      "region": "日本",
+      "official_site": "https://hatopla.com",
+      "taiwan_search": [
+        "HATOPLA 台灣 新品",
+        "PxPxP PPP EXE site:shopee.tw",
+        "ハトプラ 台湾"
+      ],
+      "search_keywords": [
+        "HATOPLA 新商品",
+        "ハトプラ 新製品",
+        "PxPxP PPP EXE 新商品",
+        "HATOPLA new product"
+      ],
+      "notes": "PxPxP（PPP）為日本 EXE 旗下子品牌。EXE、G PROJECT、PPP 三品牌已於 2023年12月統合為 HATOPLA（ハトプラ）。官網：hatopla.com，X：@hatopla"
+    },
+    {
+      "id": "lelo",
+      "name": "LELO",
+      "region": "瑞典",
+      "official_site": "https://www.lelo.com",
+      "taiwan_search": [
+        "LELO 台灣 新品",
+        "LELO site:shopee.tw",
+        "LELO site:redino.tw",
+        "LELO site:24h.pchome.com.tw"
+      ],
+      "search_keywords": [
+        "LELO new product",
+        "LELO new arrival",
+        "LELO 新品",
+        "LELO launch"
+      ],
+      "notes": "瑞典奢華品牌，24K金限量版聞名，高端市場定位"
+    }
+  ]
+}
