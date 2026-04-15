@@ -33,10 +33,83 @@ HEADERS = {
 NOISE_TAGS = {"nav", "header", "footer", "script", "style", "noscript", "aside"}
 
 
+def _extract_embedded_products(soup: "BeautifulSoup") -> str:
+    """
+    從 <script> 標籤中提取嵌入的產品 JSON 資料。
+    支援以下常見電商平台格式：
+      1. 91APP（UPKO 台灣站等）：app.value('products', JSON.parse('...'))
+      2. JSON-LD：<script type="application/ld+json"> 結構化資料
+      3. Shopify：window.theme.product = {...} 或 var meta = {...}
+    回傳可讀的產品清單文字，無法提取則回傳空字串。
+    """
+    import json as _json
+
+    lines = []
+
+    for script in soup.find_all("script"):
+        content = script.string or ""
+        if not content.strip():
+            continue
+
+        # ── 格式 1：91APP 平台（upko.com.tw、其他台灣電商）──
+        # 格式：app.value('products', JSON.parse('JSON字串'))
+        m = re.search(r"app\.value\(['\"]products['\"],\s*JSON\.parse\(['\"](.+?)['\"]\)\)", content, re.S)
+        if m:
+            try:
+                raw = m.group(1).encode("utf-8").decode("unicode_escape")
+                products = _json.loads(raw)
+                for p in products[:50]:  # 最多取 50 筆
+                    name  = p.get("title") or p.get("name") or ""
+                    price = p.get("price") or p.get("min_price") or ""
+                    if name:
+                        lines.append(f"【商品】{name}" + (f"  NT${price}" if price else ""))
+                if lines:
+                    return "\n".join(lines)
+            except Exception:
+                pass
+
+        # ── 格式 2：JSON-LD 結構化資料 ──
+        if script.get("type") == "application/ld+json":
+            try:
+                data = _json.loads(content)
+                # 可能是單一物件或陣列
+                items = data if isinstance(data, list) else [data]
+                for item in items:
+                    dtype = item.get("@type", "")
+                    if dtype in ("Product", "ItemList"):
+                        name = item.get("name") or ""
+                        price = ""
+                        offers = item.get("offers", {})
+                        if isinstance(offers, dict):
+                            price = offers.get("price", "")
+                        if name:
+                            lines.append(f"【商品】{name}" + (f"  {price}" if price else ""))
+            except Exception:
+                pass
+
+        # ── 格式 3：Shopify / 通用 window 變數 ──
+        # 格式：window.ShopifyAnalytics.meta.product = {...}
+        m = re.search(r'"title"\s*:\s*"([^"]+)".*?"price"\s*:\s*"?(\d+)"?', content, re.S)
+        if m and "product" in content.lower():
+            try:
+                # 簡單提取所有 "title": "..." 模式
+                titles = re.findall(r'"title"\s*:\s*"([^"]{3,80})"', content)
+                for t in titles[:20]:
+                    if not any(kw in t.lower() for kw in ["script", "function", "window", "var "]):
+                        lines.append(f"【商品】{t}")
+                if lines:
+                    return "\n".join(lines)
+            except Exception:
+                pass
+
+    return "\n".join(lines)
+
+
 def fetch_page_text(url: str, timeout: int = 15) -> str:
     """
     下載頁面並回傳純文字。
-    若頁面有效文字少於 200 字元（可能是 JS 渲染），回傳空字串。
+    若頁面有效文字少於 200 字元，先嘗試從 <script> 提取嵌入產品 JSON；
+    兩者皆失敗（可能是完全 JS 渲染）則回傳空字串。
     """
     try:
         resp = requests.get(url, headers=HEADERS, timeout=timeout)
@@ -44,6 +117,9 @@ def fetch_page_text(url: str, timeout: int = 15) -> str:
         resp.encoding = resp.apparent_encoding or "utf-8"
 
         soup = BeautifulSoup(resp.text, "html.parser")
+
+        # ── 優先嘗試從 script 提取嵌入的產品 JSON（在移除 script 前執行）──
+        embedded = _extract_embedded_products(soup)
 
         # 移除雜訊區塊
         for tag in soup.find_all(NOISE_TAGS):
@@ -58,17 +134,31 @@ def fetch_page_text(url: str, timeout: int = 15) -> str:
         )
 
         if not main:
-            return ""
+            return embedded if len(embedded) >= 200 else ""
 
         # 取得純文字，合併多餘空白
         lines = []
         for text in main.stripped_strings:
             text = text.strip()
             if text and len(text) > 1:
+                # 跳過 AngularJS 樣板語法（{{ ... }}）
+                if re.match(r"^\{\{.*\}\}$", text):
+                    continue
                 lines.append(text)
 
-        result = "\n".join(lines)
-        return result if len(result) >= 200 else ""
+        html_text = "\n".join(lines)
+
+        # 若 HTML 純文字足夠，合併嵌入 JSON 一起回傳（去除 AngularJS 噪音後）
+        if len(html_text) >= 200:
+            if embedded:
+                return html_text + "\n\n--- 嵌入商品資料 ---\n" + embedded
+            return html_text
+
+        # HTML 純文字不足 → 退而使用嵌入 JSON
+        if len(embedded) >= 200:
+            return embedded
+
+        return ""
 
     except Exception as e:
         print(f"    [抓取失敗] {url}: {e}")

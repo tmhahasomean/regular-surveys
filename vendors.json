@@ -21,6 +21,7 @@
       "region": "日本",
       "official_site": "https://www.tenga.co.jp",
       "global_site": "https://tenga-global.com",
+      "snapshot_pages": ["https://www.tenga.tw/products"],
       "taiwan_search": [
         "TENGA 台灣 新品",
         "TENGA site:shopee.tw",
@@ -56,7 +57,8 @@
       "id": "upko",
       "name": "UPKO",
       "region": "中國",
-      "official_site": "https://www.upkoofficialshop.com",
+      "official_site": "https://www.upko.com.tw",
+      "snapshot_pages": ["https://www.upko.com.tw/categories/new-arrival"],
       "taiwan_search": [
         "UPKO 台灣 新品",
         "UPKO site:shopee.tw",
@@ -182,6 +184,7 @@
       "name": "LELO",
       "region": "瑞典",
       "official_site": "https://www.lelo.com",
+      "snapshot_pages": ["https://www.lelo.com/new-sex-toys"],
       "taiwan_search": [
         "LELO 台灣 新品",
         "LELO site:shopee.tw",
